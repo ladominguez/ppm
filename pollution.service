@@ -1,0 +1,14 @@
+[Unit]
+Description=Measure Pollution
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/air/ppm/
+ExecStart=/home/pi/env1/bin/python3 /home/pi/air/ppm/pollution.py
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

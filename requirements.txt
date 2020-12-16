@@ -1,0 +1,6 @@
+flake8
+autopep8
+pyserial-asyncio
+numpy
+matplotlib
+
