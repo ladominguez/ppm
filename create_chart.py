@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import sqlite3
 import pandas
 import matplotlib.dates as md
+plt.rcParams['timezone'] = 'Mexico/General'
 
-
-cmd_sql = r"select  *,datetime(ts,'unixepoch','localtime')  from measurements2 where ts >= (select strftime('%s',(select datetime('now','-24 hour'))))"
+cmd_sql = r"select  *,datetime(ts,'unixepoch','localtime')  from measurements2 where ts >= (select strftime('%s',(select datetime('now','-8 hour','localtime'))))"
 
 db = sqlite3.connect("air_quality.db")
 df = pandas.read_sql_query(cmd_sql, db)
