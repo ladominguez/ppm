@@ -24,22 +24,6 @@ FRAME_SZ = 32
 REFRESH_SEC = 60
 
 
-class Measurement:
-    def __init__(self, m_0_cf1, m2_5_cf1, m10_0_cf1, m1_0_atmo, m2_5_atmo,
-                 m10_0_atmo, m0_3_ct, m0_5_ct, m1_0_ct, m2_5_ct, m5_0_ct, m10_0_ct):
-        self.pm1_0_cf1 = m1_0_cf1
-        self.pm2_5_cf1 = m2_5_cf1
-        self.pm10_0_cf1 = m10_0_cf1
-        self.pm1_0_atmo = m1_0_atmo
-        self.pm2_5_atmo = m2_5_atmo
-        self.pm10_0_atmo = m10_0_atmo
-        self.pm0_3_ct = m0_3_ct
-        self.pm0_5_ct = m0_5_ct
-        self.pm1_0_ct = m1_0_ct
-        self.pm2_5_ct = m2_5_ct
-        self.pm5_0_ct = m5_0_ct
-        self.pm10_0_ct = m10_0_ct
-
 
 class Monitor(asyncio.Protocol):
     def __init__(self):
@@ -65,14 +49,6 @@ class Monitor(asyncio.Protocol):
                 self.process(self.data_)
                 self.data_ = bytearray()
                 self.data_ += data
-                #self.ct_ = self.ct_ + 1
-                #if (self.ct_ >= 1):
-                #self.transport.write(sleep_bytes)
-                #log.info("sleeping")
-                #time.sleep(REFRESH_SEC)
-                #log.info("Done")
-                #self.transport.write(wakeup_bytes)
-                #    self.ct_ = 0
         else:
             self.data_ += data
 
@@ -89,7 +65,6 @@ class Monitor(asyncio.Protocol):
         proc_data = [(d1 << 8) + d2 for d1, d2 in zip(higher, lower)]
 
         ts = int(time.time())
-        #print("ts: ", ts, " len(proc_data): ", len(proc_data), " proc_data: ", proc_data)
         log.debug("%d %d %s", ts % 5, len(proc_data), proc_data)
 
         if ts % 60 == 0:
