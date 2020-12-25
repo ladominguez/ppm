@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, sys
 import serial_asyncio
 import serial
 import logging
@@ -17,7 +17,7 @@ initiate_passive = bytearray([0x42, 0x4d, 0xe1, 0x0, 0x00, 0x01, 0x70])
 
 sleep_bytes = bytearray([0x42, 0x4d, 0xe4, 0x00, 0x00, 0x01, 0x73])
 wakeup_bytes = bytearray([0x42, 0x4d, 0xe4, 0x00, 0x01, 0x01, 0x74])
-db = sqlite3.connect("air_quality.db")
+db = sqlite3.connect("/home/pi/air/ppm2/air_quality.db")
 cursor = db.cursor()
 
 FRAME_SZ = 32
@@ -106,6 +106,7 @@ class Monitor(asyncio.Protocol):
 
     def connection_lost(self, exc):
         log.info('port closed')
+        sys.exit('Port closed')
         asyncio.get_event_loop().stop()
 
 
