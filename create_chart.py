@@ -9,7 +9,7 @@ from datetime import datetime
 plt.rcParams['timezone'] = 'Mexico/General'
 
 
-tnow=datetime.now().strftime("%Y%d%m%H%M%S")
+tnow=datetime.now().strftime("%Y%m%d%H%M%S")
 
 cmd_sql = r"select  *,datetime(ts,'unixepoch','localtime')  from measurements2 where ts >= (select strftime('%s',(select datetime('now','-8 hour','localtime'))))"
 
