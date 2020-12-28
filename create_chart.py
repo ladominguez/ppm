@@ -11,7 +11,7 @@ plt.rcParams['timezone'] = 'Mexico/General'
 
 tnow=datetime.now().strftime("%Y%m%d%H%M%S")
 
-cmd_sql = r"select  *,datetime(ts,'unixepoch','localtime')  from measurements2 where ts >= (select strftime('%s',(select datetime('now','-8 hour','localtime'))))"
+cmd_sql = r"select  *,datetime(ts,'unixepoch','localtime')  from measurements2 where ts >= (select strftime('%s',(select datetime('now','-12 hour','localtime'))))"
 
 db = sqlite3.connect("air_quality.db")
 df = pandas.read_sql_query(cmd_sql, db)
