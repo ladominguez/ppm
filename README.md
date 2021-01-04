@@ -9,11 +9,17 @@ Este proyecto tiene como objetivo crear un protocolo para el monitorio de la cal
 * 4 cables dupont.
 * <a href="https://www.espruino.com/PMS7003">Sensor de partículas PMS7003</a>
 ## Paso 1 - Configuración de la Raspberry Pi.
-El primer paso consiste en instalar el sistema operativo a la computadora **Raspberry Pi**. Existen múltiples formas de hacerlo, sin embargo, la más simple consiste en utilizar el software <a href="https://www.raspberrypi.org/software/">Raspberry Pi Imager</a>. El programa es muy fácil de utilizar simplemente tienes que elegir el sistema operativo insertar tu tarjeta y seguir los pasos que se te indican. Existe un sistema operativo especialmente diseñado para el uso con la Raspberry Pi, que está señalado como la opción por defecto (*Raspberry Pi OS (32-bit)*). Los siguientes pasos asumen que tienes instalado este sistema operativo.
+El primer paso consiste en instalar el sistema operativo a la computadora **Raspberry Pi**. Existen múltiples formas de hacerlo, sin embargo, la más simple consiste en utilizar el software <a href="https://www.raspberrypi.org/software/">Raspberry Pi Imager</a>. El programa es muy fácil de utilizar simplemente tienes que elegir el sistema operativo insertar tu tarjeta y seguir los pasos que se te indican. Existe un sistema operativo especialmente diseñado para el uso con la Raspberry Pi, que está señalado como la opción por defecto (*Raspberry Pi OS (32-bit)*). Los siguientes pasos asumen que tienes instalado este sistema operativo.<br>
 <img src="./img/pi_imager.png"><br>
-Una vez que hayas instalado el sistema operativo en la tarjeta SD, insertalo en tu **Raspberry Pi** y conectalo a la corriente, a tu monitor y tu teclado. La primera vez que lo utilices tendrás que configurar el sistema como se indica a través de los cuadros de dialogo. 
+Una vez que hayas instalado el sistema operativo en la tarjeta SD, insertalo en tu **Raspberry Pi** y conectalo a la corriente, a tu monitor y tu teclado. La primera vez que lo utilices tendrás que configurar el sistema como se indica a través de los cuadros de dialogo. (**Nota: El resto de las instrucciones consideran que el lenguaje del sistema operativo está en inglés, por lo que te recomiendo instalarlo en este idioma.**)
 ## Paso 2 - Habilita el puerto serial y la conexión SSH
 Los puertos seriales y de conexión SSH están desabilitados por defectos, para poder desarrollar este proyecto deberás de habilitar de la siguiente forma. Primero abra la terminal y escribe el siguiente comando. 
 ```
 sudo raspi-config
 ```
+Te aparecerá la siguiente ventana de diálogo, seleccional la opción **Select -> Interfacing Options**<br>
+<img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step%201.png"><br>
+Posteriormente, selecciona esta opción para habilitar el puerto serial (**UART**). <br>
+<img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step2.png"><br>
+Habilita el puerto serial cuando te lo solicite. <img>
+<img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step4.png"><br>
