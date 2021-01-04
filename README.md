@@ -1,2 +1,3 @@
-# ppm
-Proyecto de monitoreo de calidad de aire. 
+# ppm - Proyecto de monitoreo de la calidad del aire. 
+## Introducción
+Este proyecto tiene como objetivo crear un protocolo para el monitorio de la calidad del aire que permite conocer a quien lo construye la cantidad de particulas suspendidas en el aire. En algunas ciudades como la Ciudad de México, se cuenta desde hace varios años con un sistema de monitoreo que permite informar a la población y a las autoridades de la calidad del aire de la ciudad. A este sistema se le conoce como **Indice Metropolitano de la Calidad del Aire (IMECA)**. En este proyecto vamos a generar un sistema de monitorio que permita medir la concentración de partículas suspendidas en el aire, las cuales se almacenarán en una base de datos y generará un reporte díario de la concentración de partículas. La siguiente gráfica muestra la clasificación de la calidad
