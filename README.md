@@ -29,6 +29,7 @@ Posteriormente, selecciona esta opción para habilitar el puerto serial (**UART*
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step2.png"><br>
 Habilita el puerto serial cuando te lo solicite. <br>
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step4.png"><br>
+Reinicia la computadora para que los cambios tengan efecto.
 ## Paso 3 - Conexión del sensor
 El sensor de partículas <a href="https://www.espruino.com/PMS7003">PMS7003</a> utiliza conexión serial para enviar los datos que genera. Existen varios modos de operación los cuales puedes consultar en las hojas de especificaciones. Para este proyecto vamos a utilizar la configuración de sensor activo de manera que registre datos de manera continua. De acuerdo al diagrama de especificaciones el sensor cuenta con las siguientes terminales.
 <div>
@@ -69,3 +70,16 @@ pip3 install -r requirements.txt
 ```
 
 ## Paso 5 - Crea una base de datos
+Introduce en la terminal los siguientes comandos para crear la base de datos `air_quality.db`. El sensor produce 12 valores diferentes de calidad del aire, es este proyecto únicamente vamos a graficar los tres primeros que corresponden a PM1, PM2.5 y PM10. Consulta la <a href="https://www.evelta.com/content/datasheets/203-PMS7003.pdf">hoja de especificaciones</a> para mayor información.
+
+```
+sqlite3 air_quality.db
+sqlite> CREATE TABLE measurements2 (ts integer primary key, m1_0_cf1 integer, m2_5_cf1 integer, m10_0_cf1 integer, m1_0_atmo integer, m2_5_atmo integer, m10_0_atmo integer, m0_3_ct integer, m0_5_ct integer, m1_0_ct integer, m2_5_ct integer, m5_0_ct integer, m10_0_ct integer);
+sqlite> .exit
+```
+## Paso 6 - Prueba que el código funcione correctamente
+Antes de añadir el servicio de Linux, vamos a verificar que este leyendo los datos correctamente. Ejecutalo como superusuario con Python versión 3.
+
+```
+sudo python3 pollution.py
+```
