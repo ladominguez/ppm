@@ -66,7 +66,7 @@ git clone https://github.com/ladominguez/ppm.git
 Esto creará un directorio llamado `ppm` con todos los archivos necesarios para ejecutar el programa. Escribe los siguientes comandos para instalar las librerias necesarias.
 ```
 cd ppm
-pip3 install -r requirements.txt
+sudo pip3 install -r requirements.txt
 ```
 
 ## Paso 5 - Crea una base de datos
@@ -83,3 +83,62 @@ Antes de añadir el servicio de Linux, vamos a verificar que este leyendo los da
 ```
 sudo python3 pollution.py
 ```
+## Paso 7 - Agrega el programa como un servicio de Linux
+Para inciar el programa de manera autónoma cada vez que enciendas las computadora, se puede registrar como un servicio de Linux. Esto te permitirá conocer el estado del sensor y tener un registro de los eventos que se registran en el `log`. En caso de ser necesario haz las modificaciones que consideres pertinentes al archivo `polution.service`. Una vez modificado crea un enlace simbólico (symbolic link) de la siguiente manera.
+
+```
+sudo ln -s /home/pi/ppm/pollution.service /etc/systemd/system/pollution.service
+```
+Posteriormente recarga los archivos de servicio para incluir el nuevo servicio.
+
+```
+sudo systemctl daemon-reload
+
+```
+Para iniciar el servicio de manera manual usa el siguiente comando,
+
+```
+sudo systemctl start pollution.service
+```
+
+Para conocer el estado del servicio,
+
+```
+sudo systemctl status pollution.service
+```
+Finalmente, para iniciar el servicio cada vez que inicia el sistema utiliza.
+```
+sudo systemctl enable pollution.service
+```
+## Paso 7 - Genera gráficas diarias (crontab)
+Linux permite ejecutar programas de manera regular utilizando la utilería de `crontab`. Para editarlo utiliza el siguiente cmando,
+
+```
+crontab -e
+```
+Si es la primera vez que lo ejecutas te preguntará que editor de texto deseas utilizar. El formato de crontab contiene 6 columnas como se muestra. En el caso de que requieras que se ejecute el comando en todos los valores posibles puede utilizar el símbolo de *. 
+<pre>
+<strong>Campo    Descripción    Valores permitidos</strong>
+MIN      Minuto            0 a 59
+HOUR     Hora              0 a 23
+DOM      Día del mes       1-31
+MON      Mes               1-12
+DOW      Día de la semana  0-6
+CMD      Comando           Comando a ser ejecutado.
+</pre>
+
+El programa `create_chart.py` generá un gráfica con los valores leidos por el sensor. Por ejemplo, si deseas crear una gráfica de manera diaria a las 6:15AM. Añade la siguiente línea al final del archivo de `crontab`.
+
+```
+15 6 * * * /usr/bin/python3 /home/pi/ppm/create_chart.py
+```
+## Paso 8 - Genera una gráfica 
+Para verificar que el sensor está funcionando de manera adecuada. Espera algunas horas a que se colecten algunos datos y genera una gráfica de manera manual con el siguiente comando.
+
+```
+/usr/bin/python3 /home/pi/ppm/create_chart.py
+```
+Deberías de obtener una gráfica similar a la que se muestra a continuación. 
+<div>
+ <img src="./20202712175536_ppm.png">
+</div>
