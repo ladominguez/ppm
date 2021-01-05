@@ -27,7 +27,7 @@ Te aparecerá la siguiente ventana de diálogo, seleccional la opción **Select 
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step%201.png"><br>
 Posteriormente, selecciona esta opción para habilitar el puerto serial (**UART**). <br>
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step2.png"><br>
-Habilita el puerto serial cuando te lo solicite. <img>
+Habilita el puerto serial cuando te lo solicite. <br>
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step4.png"><br>
 ## Paso 3 - Conexión del sensor
 El sensor de partículas <a href="https://www.espruino.com/PMS7003">PMS7003</a> utiliza conexión serial para enviar los datos que genera. Existen varios modos de operación los cuales puedes consultar en las hojas de especificaciones. Para este proyecto vamos a utilizar la configuración de sensor activo de manera que registre datos de manera continua. De acuerdo al diagrama de especificaciones el sensor cuenta con las siguientes terminales.
