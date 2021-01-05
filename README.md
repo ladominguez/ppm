@@ -65,7 +65,7 @@ git clone https://github.com/ladominguez/ppm.git
 Esto creará un directorio llamado `ppm` con todos los archivos necesarios para ejecutar el programa. Escribe los siguientes comandos para instalar las librerias necesarias.
 ```
 cd ppm
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Paso 5 - Crea una base de datos
