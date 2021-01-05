@@ -1,4 +1,4 @@
-# ppm - Proyecto de monitoreo de la calidad del aire. 
+# PPM - Proyecto de monitoreo de la calidad del aire. 
 ## Introducción
 Este proyecto tiene como objetivo crear un protocolo para el monitorio de la calidad del aire que permite conocer a quien lo construye la cantidad de particulas suspendidas en el aire. En algunas ciudades como la Ciudad de México, se cuenta desde hace varios años con un sistema de monitoreo que permite informar a la población y a las autoridades de la calidad del aire de la ciudad. A este sistema se le conoce como **Indice Metropolitano de la Calidad del Aire (IMECA)**. En este proyecto vamos a generar un sistema de monitorio que permita medir la concentración de partículas suspendidas en el aire, las cuales se almacenarán en una base de datos y generará un reporte díario de la concentración de partículas. La siguiente gráfica muestra la clasificación de la calidad. <br>
 ![IMECAS](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Imeca.svg/1000px-Imeca.svg.png)
@@ -11,7 +11,13 @@ Este proyecto tiene como objetivo crear un protocolo para el monitorio de la cal
 ## Paso 1 - Configuración de la Raspberry Pi.
 El primer paso consiste en instalar el sistema operativo a la computadora **Raspberry Pi**. Existen múltiples formas de hacerlo, sin embargo, la más simple consiste en utilizar el software <a href="https://www.raspberrypi.org/software/">Raspberry Pi Imager</a>. El programa es muy fácil de utilizar simplemente tienes que elegir el sistema operativo insertar tu tarjeta y seguir los pasos que se te indican. Existe un sistema operativo especialmente diseñado para el uso con la Raspberry Pi, que está señalado como la opción por defecto (*Raspberry Pi OS (32-bit)*). Los siguientes pasos asumen que tienes instalado este sistema operativo.<br>
 <img src="./img/pi_imager.png"><br>
-Una vez que hayas instalado el sistema operativo en la tarjeta SD, insertalo en tu **Raspberry Pi** y conectalo a la corriente, a tu monitor y tu teclado. La primera vez que lo utilices tendrás que configurar el sistema como se indica a través de los cuadros de dialogo. (**Nota: El resto de las instrucciones consideran que el lenguaje del sistema operativo está en inglés, por lo que te recomiendo instalarlo en este idioma.**)
+Una vez que hayas instalado el sistema operativo en la tarjeta SD, insertalo en tu **Raspberry Pi** y conectalo a la corriente, a tu monitor y tu teclado. La primera vez que lo utilices tendrás que configurar el sistema como se indica a través de los cuadros de dialogo. (**Nota: El resto de las instrucciones consideran que el lenguaje del sistema operativo está en inglés, por lo que te recomiendo instalarlo en este idioma.**)<br>
+**Es recomendable cambiar la contraseña por defecto para una mayor seguridad.** Para esto escribre el siguiente comando en la terminal.
+```
+passwd
+```
+El contraseña por defecto es `raspberry`. 
+
 ## Paso 2 - Habilita el puerto serial y la conexión SSH
 Los puertos seriales y de conexión SSH están desabilitados por defectos, para poder desarrollar este proyecto deberás de habilitar de la siguiente forma. Primero abra la terminal y escribe el siguiente comando. 
 ```
@@ -23,3 +29,43 @@ Posteriormente, selecciona esta opción para habilitar el puerto serial (**UART*
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step2.png"><br>
 Habilita el puerto serial cuando te lo solicite. <img>
 <img src="https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_UART/UART%20step4.png"><br>
+## Paso 3 - Conexión del sensor
+El sensor de partículas <a href="https://www.espruino.com/PMS7003">PMS7003</a> utiliza conexión serial para enviar los datos que genera. Existen varios modos de operación los cuales puedes consultar en las hojas de especificaciones. Para este proyecto vamos a utilizar la configuración de sensor activo de manera que registre datos de manera continua. De acuerdo al diagrama de especificaciones el sensor cuenta con las siguientes terminales.
+<div>
+  <img src="https://www.espruino.com/refimages/PMS7003_PMS7003_pins.gif">
+</div>
+En este proyecto únicamente vamos a utilizar las siguientes 4 terminales:
+
+1. **Vcc** - Voltaje a 5V: Pines 1 o 2.
+1. **GDC** - Tierra: Pines 3 o 4.
+1. **RX** - Transmisión. Pin 7.
+1. **TX** - Recepción. Pin 9.
+
+Estos 4 cables deberán de conectar a 4 de las terminales de tu Rasberry. Si utilizas una Raspberry 3, 
+<div>
+  <img src="https://www.raspberrypi-spy.co.uk/wp-content/uploads/2012/06/raspberry_pi_3_model_b_plus_gpio.jpg">
+</div>
+Conecta los pines de la siguiente forma:
+<center>
+  
+Raspberry    | Sensor
+------------ | -------------
+Vcc - 1 o 2  | Vcc - 1 o 2
+GND - 6      | GND - 3 o 4
+RX  - 10 (GPIO15) | TX - 9
+TX  - 8 (GPIO14)  | RX - 7
+
+</center>
+
+## Paso 4 - Descarga el código.
+Para descargar el codigo lo deberás de ingresar el siguiente comando en la terminal. 
+```
+git clone https://github.com/ladominguez/ppm.git
+```
+Esto creará un directorio llamado `ppm` con todos los archivos necesarios para ejecutar el programa. Escribe los siguientes comandos para instalar las librerias necesarias.
+```
+cd ppm
+pip install -r requirements.txt
+```
+
+## Paso 5 - Crea una base de datos
