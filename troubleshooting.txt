@@ -1,0 +1,6 @@
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libopenjp2-7
+sudo apt install python3-numpy
+pip3 install numpy --upgrade
+sudo apt install python3-matplotlib
+pip3 install pandas --upgrade
