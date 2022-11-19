@@ -51,7 +51,7 @@ Conecta los pines de la siguiente forma:
   
 Raspberry    | Sensor
 ------------ | -------------
-Vcc - 1 o 2  | Vcc - 1 o 2
+Vcc - 2 o 4  | Vcc - 1 o 2
 GND - 6      | GND - 3 o 4
 RX  - 10 (GPIO15) | TX - 9
 TX  - 8 (GPIO14)  | RX - 7
